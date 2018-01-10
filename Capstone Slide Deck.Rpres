@@ -1,0 +1,42 @@
+Data Science Capstone
+========================================================
+author: Yiu Chung Wong
+date: 12-Jan-2018
+autosize: true
+font-family: 'Helvetica'
+The app is [here](https://danty15880.shinyapps.io/DataScienceCapstone/)
+
+The Prediction Application
+========================================================
+<h3>Overview</h3>
+- Predicts English word based on the preceding words
+- Each predicted word is assigned a probability score
+- The app outputs a list of probable words and a wordcloud
+
+<h3>How to use</h3>
+1. Enter a sentence into the text field (four or more words for better accuracy)
+2. Voila!
+
+The algorithm
+========================================================
+
+ - The app employs the simple Back-off algorithm (Brants, Popat, Xu, Och, & Dean, 2007) 
+ - The corpus is used to construct a 5-gram model
+ - The algorithm first look for matching 5-grams in the 5-gram database
+ - Then recursively backs off to lower gram databases to look for additional matches
+ - Finally, look for most frequent words in the unigram database.
+ 
+Screenshot
+========================================================
+title: false
+<img src="ScreenShot.png" style="background-color:transparent; border:0px; box-shadow:none;"></img>
+
+Performance
+========================================================
+
+- The application takes advantage of pre-computation
+- i.e. all the probability and scores of all possible word combinations from the corpus are ready to be pulled out, no calculation needed
+
+- Since we only care the predictions with the highest probabilities, we only need to keep a handful of unique n-grams from each database below 5-gram. i.e. these database only contains identical starting features k times (I set k to be 5 in this application, this is completely arbitrary)
+
+- Performance benchmark can be found [here](https://raw.githubusercontent.com/emailyc/practicalmachinelearning-/gh-pages/Screen%20Shot%202018-01-10%20at%2011.00.40.png)
